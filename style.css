@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Oswald';
-    src: url('../fonts/Oswald.ttf') format('opentype');
+    src: url('fonts/Oswald.ttf') format('opentype');
     font-weight: normal;
     font-size: normal;
 }
 
 @font-face {
     font-family: 'Lato';
-    src: url('../fonts/Lato.ttf') format('opentype');
+    src: url('fonts/Lato.ttf') format('opentype');
     font-weight: normal;
     font-size: normal;
 }
@@ -25,7 +25,6 @@ body {
 }
 
 h1, h2 {
-    padding: 1rem 0;
     margin: 0;
 }
 
@@ -87,8 +86,12 @@ button:focus {
     margin-bottom: 3rem;
 }
 
-.ml-2 {
-    margin-left: 2rem;
+.ml-3 {
+    margin-left: 3rem;
+}
+
+.p-1 {
+    padding: 1rem;
 }
 
 label {
@@ -98,7 +101,6 @@ label {
 input,
 textarea {
     display: block;
-    padding: 1rem;
     width: 100%;
     background: transparent;
     border: 4px solid #c6c8d1;
