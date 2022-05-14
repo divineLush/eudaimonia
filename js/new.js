@@ -1,15 +1,29 @@
-const openRequest = indexedDB.open("eudaimonia", 1)
+const openRequest = indexedDB.open('eudaimonia', 1)
+
+const alertSuccess = () => {
+    alert('spectacular success')
+}
 
 const alertError = () => {
-    alert("something disgusting happened")
+    alert('something disgusting happened')
+}
+
+openRequest.onupgradeneeded = (e) => {
+    const db = e.target.result
+
+    if(!db.objectStoreNames.contains('notes')) {
+		const store = db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true })
+        store.createIndex('title', 'title', { unique: false })
+    }
 }
 
 openRequest.onsuccess = () => {
-    const db = openRequest.result;
-    const form = document.getElementById("noteform")
+    const form = document.getElementById('noteform')
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault()
+
+        const db = openRequest.result;
 
         const title = e.target.title.value
         const note = e.target.note.value
@@ -19,18 +33,16 @@ openRequest.onsuccess = () => {
 
         const noteObj = { title, note, dateStr }
 
-        const transaction = db.transaction("notes", "readwrite")
-        const notes = transaction.objectStore("notes")
+        const transaction = db.transaction('notes', 'readwrite')
+        const notes = transaction.objectStore('notes')
 
         const request = notes.add(noteObj)
 
-        request.onsuccess = () => {
-            alert("spectacular success")
-        }
-
+        request.onsuccess = alertSuccess
         request.onerror = alertError
-
-        console.log(db)
+        request.oncomplete = () => {
+            db.close()
+        }
     })
 }
 
