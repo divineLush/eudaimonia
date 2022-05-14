@@ -17,13 +17,13 @@ openRequest.onupgradeneeded = (e) => {
     }
 }
 
-openRequest.onsuccess = () => {
+openRequest.onsuccess = (dbEvent) => {
     const form = document.getElementById('noteform')
 
     form.addEventListener('submit', (e) => {
         e.preventDefault()
 
-        const db = openRequest.result;
+        const db = dbEvent.target.result
 
         const title = e.target.title.value
         const note = e.target.note.value

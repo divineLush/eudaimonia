@@ -24,8 +24,9 @@ body {
     color: #c6c8d1;
 }
 
-h1, h2 {
+h1, h2, h3, p, ul, li {
     margin: 0;
+    padding: 0;
 }
 
 .font-oswald {
@@ -70,16 +71,18 @@ button:focus {
     box-shadow: 6px 6px #84a0c6;
 }
 
-.flex {
+.flex-block {
     display: flex;
-}
-
-.justify-between {
     justify-content: space-between;
+    align-items: center;
 }
 
 .mt-1 {
     margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
 }
 
 .mb-3 {
@@ -108,7 +111,16 @@ textarea {
     font-size: 2rem;
 }
 
-form {
+.container {
     width: 66%;
     margin: 0 auto;
+}
+
+#notes-list {
+    list-style: none;
+}
+
+#notes-list > li {
+    border-bottom: 4px dotted #84a0c6;
+    font-size: 1.8rem;
 }
