@@ -1,9 +1,5 @@
 const openRequest = indexedDB.open('eudaimonia', 1)
 
-const alertSuccess = () => {
-    alert('spectacular success')
-}
-
 const alertError = () => {
     alert('something disgusting happened')
 }
@@ -38,7 +34,11 @@ openRequest.onsuccess = (dbEvent) => {
 
         const request = notes.add(noteObj)
 
-        request.onsuccess = alertSuccess
+        request.onsuccess = () => {
+            e.target.title.value = ''
+            e.target.note.value = ''
+            alert('spectacular success')
+        }
         request.onerror = alertError
         request.oncomplete = () => {
             db.close()

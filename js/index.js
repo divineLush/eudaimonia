@@ -22,7 +22,6 @@ openRequest.onsuccess = (e) => {
 
     const transaction = db.transaction('notes', 'readonly')
     const notes = transaction.objectStore('notes')
-    console.log(notes)
 
     const request = notes.getAll()
     request.onsuccess = (dbEvent) => {
@@ -36,6 +35,22 @@ openRequest.onsuccess = (e) => {
             li.innerHTML = `<div class="flex-block"><h3 class="font-oswald">${title}</h3><span>${dateStr}</span></div><p class="mt-2">${note}</p>`
             listEl.prepend(li)
         })
+
+        const deleteAllEl = document.getElementById('delete-all')
+        deleteAllEl.addEventListener('click', (e) => {
+            const transaction = db.transaction('notes', 'readwrite')
+            const notes = transaction.objectStore('notes')
+
+            const request = notes.clear()
+            request.onerror = alertError
+            request.onsuccess = () => {
+                const listEl = document.getElementById('notes-list')
+                listEl.innerHTML = ''
+            }
+            request.oncomplete = () => {
+                db.close()
+            }
+        })
     }
     request.onerror = alertError
     request.oncomplete = () => {
@@ -44,4 +59,3 @@ openRequest.onsuccess = (e) => {
 }
 
 openRequest.onerror = alertError
-
